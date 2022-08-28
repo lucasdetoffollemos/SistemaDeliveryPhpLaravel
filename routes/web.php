@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Models\TipoProduto;
+use \App\Models\Produto;
 use Illuminate\Support\Facades\DB;
 
 
@@ -53,13 +54,25 @@ Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome){
    
 
     $tiposProdutos = DB::select("select * from tipo_produtos");
-    echo "<h3>Produtos salvos: </h3>";
+    echo "<h3>Tipo produtos salvos: </h3>";
     print_r($tiposProdutos);
 });
 
-//TODO
-//salvar os dados do produto no banco
 Route::get("produto/add/{nome}/{preco}/{Tipo_Produtos_id}/{ingredientes}/{urlImage}",
 function($nome, $preco, $Tipo_Produtos_id, $ingredientes, $urlImage){
+    $produto = new Produto();
+    $produto->nome = $nome;
+    $produto->preco = $preco;
+    $produto->Tipo_Produtos_id = $Tipo_Produtos_id;
+    $produto->ingredientes = $ingredientes;
+    $produto->urlImage = $urlImage;
+    $produto->save();
+
+    echo "<h1>Produto salvo com sucesso!</h1>";
+   
+
+    $produtos = DB::select("select * from produtos");
+    echo "<h3>Produtos salvos: </h3>";
+    print_r($produtos);
     
 });
