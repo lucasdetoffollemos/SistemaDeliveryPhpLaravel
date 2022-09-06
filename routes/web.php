@@ -22,57 +22,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/teste', function(){
-   echo "<html>
-            <h1>Página de teste</h1>
-        </html>";
+//ROTAS TIPO PRODUTO
+Route::get('/tipoproduto', "App\Http\Controllers\TipoProdutoController@index");
+Route::post('/tipoproduto', "App\Http\Controllers\TipoProdutoController@store");
+Route::get('/tipoproduto/create', "App\Http\Controllers\TipoProdutoController@create");
 
-});
-
-Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome){
-    echo "Seja bem vindo $nome $sobrenome";
- 
- });
-
- Route::get('/ola/{nome?}', function($nome=null){
-    if(isset($nome)){
-        echo "Ola! Seja bem vindo $nome.";
-    }
-    else{
-        echo "Olá! Seja bem vindo anônimo";
-    }
- 
- });
-
-
- Route::get("tipoproduto/add/{descricao}", function($descricao){
-    $tipoProduto = new TipoProduto();
-    $tipoProduto->descricao = $descricao;
-    $tipoProduto->save();
-
-    echo "<h1>Tipo Produto salvo com sucesso!</h1>";
-   
-
-    $tiposProdutos = DB::select("select * from tipo_produtos");
-    echo "<h3>Tipo produtos salvos: </h3>";
-    print_r($tiposProdutos);
-});
-
-Route::get("produto/add/{nome}/{preco}/{Tipo_Produtos_id}/{ingredientes}/{urlImage}",
-function($nome, $preco, $Tipo_Produtos_id, $ingredientes, $urlImage){
-    $produto = new Produto();
-    $produto->nome = $nome;
-    $produto->preco = $preco;
-    $produto->Tipo_Produtos_id = $Tipo_Produtos_id;
-    $produto->ingredientes = $ingredientes;
-    $produto->urlImage = $urlImage;
-    $produto->save();
-
-    echo "<h1>Produto salvo com sucesso!</h1>";
-   
-
-    $produtos = DB::select("select * from produtos");
-    echo "<h3>Produtos salvos: </h3>";
-    print_r($produtos);
-    
-});
+//ROTAS PRODUTO
+Route::get('/produto', "App\Http\Controllers\ProdutoController@index");
+Route::get('/produto/create', "App\Http\Controllers\ProdutoController@create");
+Route::post('/produto', "App\Http\Controllers\ProdutoController@store");
