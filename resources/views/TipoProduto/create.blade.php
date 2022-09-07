@@ -23,6 +23,16 @@
               <label for="id-input-descricao">Descrição</label>
               <input name="descricao" type="text" class="form-control" id="id-input-descricao" placeholder="Digite a descrição">
             </div>
+            @if ($errors->any())
+                <br>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="my-1">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-primary" href="/tipoproduto">Voltar</a>

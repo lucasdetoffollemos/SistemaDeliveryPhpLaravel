@@ -23,6 +23,15 @@ class TipoProdutoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'descricao' => 'required|min:2|max:50',
+        ], 
+        [
+            'descricao.required' => 'Necessario preencher o campo descricao',
+            'descricao.min' => 'O preço necessita ter no minimo 2 números',
+            'descricao.max' => 'O preço pode ter até 50 números'
+        ]);
+
         //
         $tipoProduto =  new TipoProduto();
         $tipoProduto->descricao =  $request->descricao;
