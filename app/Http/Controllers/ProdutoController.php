@@ -51,6 +51,23 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nome' => 'required',
+            'preco' => 'required|max:7',
+            'tipo' => 'required',
+            'ingredientes' => 'required',
+            'urlDaImagem' => 'required',
+        ], 
+        [
+            'nome.required' => 'Necessario preencher o campo nome',
+            'preco.required' => 'Necessario preencher o campo preço',
+            'preco.max' => 'O preço pode ter até 7 números',
+            'tipo.required' => 'Selecione um tipo',
+            'ingredientes.required' => 'Necessario preencher o campo ingredientes',
+            'urlDaImagem.required' => 'Necessario preencher o campo url da imagem',
+        ]);
+
         $produto = new Produto();
         $produto->nome = $request->nome;
         $produto->preco = $request->preco;
