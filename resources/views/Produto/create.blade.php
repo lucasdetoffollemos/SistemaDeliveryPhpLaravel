@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/produto" method="post">
+        <form action="/produto" method="post" onsubmit="return validateSelect()">
             @csrf
             <div class="form-group">
               <label for="id-input-id">ID</label>
@@ -30,12 +30,12 @@
             <div class="form-group">
                 <label for="id-select-tipo">Tipo</label>
                 <select name="tipo" id="id-select-tipo" class="form-select" aria-label="Selecione um tipo" required="required">
-                    <option value="-1"></option>
+                    <option value="-1">Selecione um tipo</option>
                     <@foreach ($tipoProdutos as $tipo)
                     <option value="{{$tipo->id}}">{{$tipo->descricao}}</option>
                     @endforeach
                 </select>
-                <!--<input name="tipo" type="number" class="form-control" id="id-input-tipo" placeholder="Digite o tipo do produto">-->
+                
             </div>
             <div class="form-group">
                 <label for="id-input-ingredientes">Ingredientes</label>
@@ -46,10 +46,21 @@
                 <input name="urlDaImagem" type="text" class="form-control" id="id-input-urlDaImagem" placeholder="Digite a Url da Imagem">
             </div>
             <div class="my-1">
+                
                 <button  type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-primary" href="/produto">Voltar</a>
             </div>
         </form>
     </div>   
+    <script>
+        function validateSelect(){
+            let selectOption = document.getElementById('id-select-tipo').value;
+            if(selectOption == -1){
+                alert('Por favor preencha um tipo de produto');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
