@@ -41,17 +41,41 @@ class TipoProdutoController extends Controller
 
     public function show($id)
     {
-        //
+        $tipoProduto = TipoProduto::find($id);
+
+
+        if (isset($tipoProduto)) {
+            return view("TipoProduto/show")->with("tipoProduto", $tipoProduto);
+        }
+
+        //$produto = Produto::find($id);
+
+        echo "Tipo Produto não encontrado";
     }
 
     public function edit($id)
     {
-        //
+        $tipoProduto = TipoProduto::find($id); //retorna obj ou num
+
+        if (isset($tipoProduto)) {
+
+            return view("TipoProduto/edit")->with("tipoProduto", $tipoProduto);
+        }
+
+        echo "Tipo de Produto não encontrado";
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $tipoProduto = TipoProduto::find($id);
+
+        if (isset($tipoProduto)) {
+            $tipoProduto->descricao = $request->descricao;
+            $tipoProduto->update();
+            return $this->index();
+        }
+
+        echo "Tipo Produto não encontrado";
     }
 
     public function destroy($id)

@@ -14,7 +14,7 @@
     <div class="container">
         
         <div class="my-1"> 
-            <a class="btn btn-primary" href="/tipoproduto/create">Criar Tipo Produto</a>
+            <a class="btn btn-primary" href="{{route("tipoproduto.create")}}">Criar Tipo Produto</a>
             <a class="btn btn-primary" href="#">Voltar</a>
         </div>
        
@@ -34,8 +34,8 @@
                 <th scope="row">{{$tipoProduto->id}}</th>
                 <td>{{$tipoProduto->descricao}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Mostrar</a>
-                    <a href="#" class="btn btn-secondary">Editar</a>
+                    <a href="{{route("tipoproduto.show", $tipoProduto->id)}}" class="btn btn-primary">Mostrar</a>
+                    <a href="{{route("tipoproduto.edit", $tipoProduto->id)}}" class="btn btn-secondary">Editar</a>
                     <a href="#" class="btn btn-danger">Remover</a>
                 </td>
               </tr>
