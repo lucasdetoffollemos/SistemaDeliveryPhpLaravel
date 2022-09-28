@@ -164,8 +164,15 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        DB::select("delete * from produtos where produtos.id = ?",[$id]);
+        $produto = Produto::find($id); // obj encontyrado ou null
 
-        echo "Produto excluido";
+        if(isset($produto)){
+            $produto->delete();
+            //return \Redirect::route('produto.index');
+            //return $this->index();
+            return redirect()->route('produto.index');
+        }
+
+        echo "Produto não encontrado";
     }
 }

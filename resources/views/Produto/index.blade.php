@@ -39,12 +39,47 @@
                 <td>
                 <a href="{{route("produto.show", $produto->id)}}" class="btn btn-primary">Mostrar</a>
                     <a href="{{route("produto.edit", $produto->id)}}" class="btn btn-secondary">Editar</a>
-                    <a href="{{route("produto.destroy", $produto->id)}}" class="btn btn-danger">Remover</a>
+                    <a href="#" class="btn btn-danger class-button-destroy" data-bs-toggle="modal" data-bs-target="#destroyModal" value="{{route("produto.destroy", $produto->id)}}">Remover</a>
                 </td>
               </tr>
             @endforeach
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="destroyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Remoção de recurso</h5>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       Deseja realmente remover este recurso?
+                    </div>
+                    <div class="modal-footer">
+                       <form id="id-form-modal-botao-remover" method="post" action="" style="display: inline;">
+                            @csrf
+                            @method('delete')
+                            <!--<input name="_method" type="hidden" value="DELETE">-->
+                            <input type="submit" value="Confirmar" class="btn btn-danger">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const arrayBtnRemover = document.querySelectorAll(".class-button-destroy")
+            const formModalBotaoRemover = document.querySelector("#id-form-modal-botao-remover")
+
+            arrayBtnRemover.forEach(bnRemover => {
+                bnRemover.addEventListener('click', configurarBotaoRemoverModal)
+            });
+
+            function configurarBotaoRemoverModal(){
+                //console.log(this.getAttribute("value"));
+                formModalBotaoRemover.setAttribute("action", this.getAttribute("value"));
+            }
+        </script>
 </body>
 </html>
