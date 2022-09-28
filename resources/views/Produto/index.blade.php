@@ -40,7 +40,7 @@
                 <td>{{$produto->preco}}</td>
                 <td>{{$produto->descricao}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Mostrar</a>
+                <a href="{{route("produto.show", $produto->id)}}" class="btn btn-primary">Mostrar</a>
                     <a href="#" class="btn btn-secondary">Editar</a>
                     <a href="#" class="btn btn-danger">Remover</a>
                 </td>

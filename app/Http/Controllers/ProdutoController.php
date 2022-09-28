@@ -86,7 +86,30 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $tipoProdutos = DB::select(
+            "
+        SELECT id, descricao
+        FROM  restaurantedb.tipo_produtos;"
+        );
+
+
+        $produtos = DB::select(
+            "
+        SELECT produtos.id, produtos.nome, produtos.preco, produtos.ingredientes, produtos.urlImage,  tipo_produtos.descricao
+        FROM restaurantedb.produtos
+        JOIN restaurantedb.tipo_produtos
+        ON produtos.Tipo_Produtos_id = tipo_produtos.id
+        WHERE produtos.id = ?", [$id]
+        );
+
+        if(count($produtos)>0){
+            return view("Produto/show")->with("produto", $produtos[0])->with("tipoProdutos", $tipoProdutos);
+        }
+
+        //$produto = Produto::find($id);
+
+        echo "Produto não encontrado";
     }
 
     /**
