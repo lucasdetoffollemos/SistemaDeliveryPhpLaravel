@@ -13,11 +13,8 @@
 <body>
     <div class="container">
         
-        {{--<?php 
-            print_r($produtos)
-        ?>--}}
         <div class="my-1"> 
-            <a class="btn btn-primary" href="/produto/create">Criar Produto</a>
+            <a class="btn btn-primary"href="{{route("produto.create")}}">Criar Produto</a>
             <a class="btn btn-primary" href="#">Voltar</a>
         </div>
        
@@ -41,8 +38,8 @@
                 <td>{{$produto->descricao}}</td>
                 <td>
                 <a href="{{route("produto.show", $produto->id)}}" class="btn btn-primary">Mostrar</a>
-                    <a href="#" class="btn btn-secondary">Editar</a>
-                    <a href="#" class="btn btn-danger">Remover</a>
+                    <a href="{{route("produto.edit", $produto->id)}}" class="btn btn-secondary">Editar</a>
+                    <a href="{{route("produto.destroy", $produto->id)}}" class="btn btn-danger">Remover</a>
                 </td>
               </tr>
             @endforeach
