@@ -36,7 +36,7 @@ class TipoProdutoController extends Controller
         $tipoProduto =  new TipoProduto();
         $tipoProduto->descricao =  $request->descricao;
         $tipoProduto->save();
-        return $this->index();
+        return redirect()->route('tipoproduto.index');
     }
 
     public function show($id)
@@ -72,7 +72,7 @@ class TipoProdutoController extends Controller
         if (isset($tipoProduto)) {
             $tipoProduto->descricao = $request->descricao;
             $tipoProduto->update();
-            return $this->index();
+            return redirect()->route('tipoproduto.index');
         }
 
         echo "Tipo Produto não encontrado";

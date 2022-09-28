@@ -76,7 +76,7 @@ class ProdutoController extends Controller
         $produto->ingredientes = $request->ingredientes;
         $produto->urlImage = $request->urlDaImagem;
         $produto->save();
-        return $this->index();
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -149,7 +149,7 @@ class ProdutoController extends Controller
             $produto->ingredientes = $request->ingredientes;
             $produto->urlImage = $request->urlDaImagem;
             $produto->update();
-            return $this->index();
+            return redirect()->route('produto.index');
         }
 
         echo "Produto não encontrado";
