@@ -80,6 +80,15 @@ class TipoProdutoController extends Controller
 
     public function destroy($id)
     {
-        //
+        $tipoProduto = TipoProduto::find($id); // obj encontyrado ou null
+
+        if (isset($tipoProduto)) {
+            $tipoProduto->delete();
+            //return \Redirect::route('produto.index');
+            //return $this->index();
+            return redirect()->route('tipoproduto.index');
+        }
+
+        echo "Tipo Produto não encontrado";
     }
 }
