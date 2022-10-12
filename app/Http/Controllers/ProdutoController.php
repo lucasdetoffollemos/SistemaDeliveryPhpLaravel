@@ -106,7 +106,8 @@ class ProdutoController extends Controller
             return $this->indexMessage( [$th->getMessage(), "danger"] );
         }
         
-        return $this->indexMessage( ["Produto cadastrado com sucesso", "success"] );
+        //return $this->indexMessage( ["Produto cadastrado com sucesso", "success"] );
+        return redirect()->route('produto.index', ["Produto cadastrado com sucesso", "success"] );
     }
 
     /**
@@ -155,9 +156,10 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        $produto = Produto::find($id);//retorna obj ou num
+        //$produto = Produto::find($id);//retorna obj ou num
 
         try{
+            $produto = Produto::find($id);//retorna obj ou num
             if(isset($produto)){
                 $tipoProdutos = TipoProduto::all();
                 return view("Produto/edit")->with("produto", $produto)->with("tipoProdutos", $tipoProdutos);
@@ -190,7 +192,7 @@ class ProdutoController extends Controller
                 $produto->ingredientes = $request->ingredientes;
                 $produto->urlImage = $request->urlDaImagem;
                 $produto->update();
-                return $this->indexMessage( ["Produto atualizado com sucesso", "success"] );
+                return redirect()->route('produto.index', ["Produto atualizado com sucesso", "success"] );
             }
             return $this->indexMessage( ["Produto não encontrado", "warning"] );
         }
@@ -198,8 +200,6 @@ class ProdutoController extends Controller
             // Retorno quando dá erro
             return $this->indexMessage( [$th->getMessage(), "danger"] );
         }
-        
-        echo "Produto não encontrado";
 
     }
 
@@ -218,7 +218,8 @@ class ProdutoController extends Controller
                 $produto->delete();
                 //return \Redirect::route('produto.index');
                 //return $this->index();
-                return $this->indexMessage( ["Produto removido com sucesso", "success"] );
+                //return $this->indexMessage( ["Produto removido com sucesso", "success"] );
+                return redirect()->route('produto.index', ["Produto removido com sucesso", "success"] );
             }
             return $this->indexMessage( ["Produto não encontrado", "warning"] );
         }
