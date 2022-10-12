@@ -12,7 +12,12 @@
 </head>
 <body>
     <div class="container">
-        
+        @if (isset($message))
+            <div class="alert alert-{{$message[1]}} alert-dismissible fade show" role="alert">
+                <span>{{$message[0]}}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="my-1"> 
             <a class="btn btn-primary"href="{{route("produto.create")}}">Criar Produto</a>
             <a class="btn btn-primary" href="#">Voltar</a>
